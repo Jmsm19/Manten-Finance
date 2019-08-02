@@ -4,4 +4,5 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 module.exports = new WorkboxPlugin.GenerateSW({
   clientsClaim: true,
   skipWaiting: true,
+  swDest: '../service-worker.js',
 });
