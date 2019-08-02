@@ -5,6 +5,25 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- Common metas -->
+    <meta charset="utf-8" />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <meta name='Description' content='Author: Jorge Soto, Name: Manten Budget' />
+
+    <!-- App related meta tags -->
+    <meta name='apple-mobile-web-app-title' content='Manten Budget' />
+    <meta name='application-name' content='Manten Budget' />
+    <meta name='msapplication-TileColor' content='# 6E8C61' />
+    <meta name='theme-color' content='#6E8C61' />
+
+    <!-- Icon -->
+    <link rel="apple-touch-icon" href="<%= asset_path 'change_192x192.png' %>">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- Manifest -->
     <link rel="manifest" href="manifest.json">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -13,5 +32,9 @@
 
   <body>
     <%= yield %>
+
+    <noscript>
+      You need to enable JavaScript to use this site.
+    </noscript>
   </body>
 </html>
