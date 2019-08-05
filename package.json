@@ -5,6 +5,8 @@
   "homepage": "https://manten-rails-finance.herokuapp.com/",
   "scripts": {
     "dev:client": "./bin/webpack-dev-server",
+    "lint:app": "yarn lint:ruby && yarn lint:ts",
+    "lint:ts": "eslint ./app/javascript/**/*.{ts,tsx}",
     "lint:ruby": "bundle exec rubocop -a 'app/**/*.rb'",
     "prettier:ruby": "./node_modules/.bin/prettier --write '*/**/*.rb'"
   },
@@ -55,7 +57,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn prettier:ruby && yarn lint:ruby"
+      "pre-commit": "yarn prettier:ruby && yarn lint:app"
     }
   }
 }
