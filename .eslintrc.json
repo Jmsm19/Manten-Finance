@@ -38,7 +38,10 @@
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "linebreak-style": ["error", "unix"],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
     "no-unused-vars": [
       "warn",
       {
@@ -50,6 +53,7 @@
     "no-return-await": 0,
     "jsx-a11y/anchor-is-valid": 0,
     "import/no-extraneous-dependencies": 0,
+    "react/prop-types": 0,
     "react/jsx-filename-extension": 0,
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
