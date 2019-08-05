@@ -14,7 +14,7 @@ const TransactionListItem: React.FC<Props> = ({ transaction }) => {
   return (
     <ListItem className={classNames.listItem}>
       <ListItemAvatar>
-        <Avatar src="http://lorempixel.com/200/200/people" alt="Category name">
+        <Avatar src="https://source.unsplash.com/random/200x200" alt="Category name">
           <ImageIcon />
         </Avatar>
       </ListItemAvatar>
