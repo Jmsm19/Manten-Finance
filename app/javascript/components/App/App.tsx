@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const classNames = useAppStyles({});
 
   return (
-    <React.Fragment>
+    <BrowserRouter>
       <MuiThemeProvider theme={theme}>
         <LayoutProvider>
           <Box className={classNames.rootContainer}>
@@ -24,17 +24,15 @@ const App: React.FC = () => {
               <TopNavigation />
 
               <Grid className={classNames.mainGrid} item container spacing={3}>
-                <BrowserRouter>
-                  <Switch>
-                    <Route component={BalancePage} />
-                  </Switch>
-                </BrowserRouter>
+                <Switch>
+                  <Route component={BalancePage} />
+                </Switch>
               </Grid>
             </Container>
           </Box>
         </LayoutProvider>
       </MuiThemeProvider>
-    </React.Fragment>
+    </BrowserRouter>
   );
 };
 

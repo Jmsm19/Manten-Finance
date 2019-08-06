@@ -23,7 +23,7 @@ const UserNavbar: React.FC<Props> = ({ user }) => {
             {user.name}
           </Typography>
 
-          <IconButton color="default">
+          <IconButton color="primary" className={classNames.navBtn}>
             <SettingsIcon />
           </IconButton>
         </span>

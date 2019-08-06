@@ -6,12 +6,12 @@ import colors from '../../themes/colors';
 const useMobileSidebarStyles = makeStyles({
   navLink: {
     padding: 16,
+    '&.active': {
+      backgroundColor: colors.fadedBlue,
+    },
   },
   navLinkText: {
     width: '100%',
-  },
-  activeNavLink: {
-    backgroundColor: colors.fadedBlue,
   },
 });
 

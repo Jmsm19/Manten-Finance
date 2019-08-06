@@ -32,12 +32,6 @@ const useTopNavStyles = makeStyles({
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
-  activeNavLinks: {
-    color: colors.primaryBlue,
-  },
-  navLinks: {
-    color: colors.fadedText,
-  },
   topNavUserContent: {
     width: '100%',
     display: 'grid',
@@ -46,6 +40,20 @@ const useTopNavStyles = makeStyles({
   },
   topNavUserAvatar: {
     marginRight: 20,
+  },
+  navBtn: {
+    color: colors.fadedText,
+    transition: 'color 100ms ease-in-out',
+    '&.active': {
+      color: colors.primaryBlue,
+    },
+    '&:hover': {
+      color: colors.primaryBlue,
+      backgroundColor: 'inherit',
+    },
+    '&:active': {
+      color: colors.darkBlue,
+    },
   },
 });
 

@@ -1,55 +1,53 @@
 import React from 'react';
+import classnames from 'classnames';
+import { withRouter, RouteChildrenProps } from 'react-router';
 import { Drawer, ListItem, ListItemText } from '@material-ui/core';
 
-import useMobileSidebarStyles, { drawerStyles } from './styles';
+import routes from '../../config/routes';
 
-interface Props {
+import { isRouteActive } from '../../utils';
+import useMobileSidebarStyles, { drawerStyles } from './styles';
+import useTopNavStyles from '../TopNavigation/styles';
+
+interface Props extends RouteChildrenProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const MobileSidebar: React.FC<Props> = ({ isOpen, onClose }) => {
+const MobileSidebar: React.FC<Props> = ({ location, isOpen, onClose }) => {
   const classNames = useMobileSidebarStyles({});
+  const topNavClassNames = useTopNavStyles({});
+  const routesKeys = Object.keys(routes);
 
   return (
     <Drawer
-      variant="temporary"
       anchor="top"
+      variant="temporary"
       open={isOpen}
       onClose={onClose}
-      PaperProps={{
-        style: drawerStyles,
-      }}
+      PaperProps={{ style: drawerStyles }}
     >
-      <ListItem button className={`${classNames.navLink} ${classNames.activeNavLink}`}>
-        <ListItemText
-          className={classNames.navLinkText}
-          primary="Transactions"
-          primaryTypographyProps={{
-            color: 'primary',
-          }}
-        />
-      </ListItem>
-      <ListItem button className={classNames.navLink}>
-        <ListItemText
-          className={classNames.navLinkText}
-          primary="People"
-          primaryTypographyProps={{
-            color: 'textPrimary',
-          }}
-        />
-      </ListItem>
-      <ListItem button className={classNames.navLink}>
-        <ListItemText
-          className={classNames.navLinkText}
-          primary="Setting"
-          primaryTypographyProps={{
-            color: 'textPrimary',
-          }}
-        />
-      </ListItem>
+      {routesKeys.map(key => (
+        <ListItem
+          button
+          key={key}
+          className={classnames([classNames.navLink], {
+            active: isRouteActive(location, routes[key].path),
+          })}
+        >
+          <ListItemText
+            className={classnames([classNames.navLinkText, topNavClassNames.navBtn], {
+              active: isRouteActive(location, routes[key].path),
+            })}
+            primary={routes[key].linkText}
+            primaryTypographyProps={{
+              color: isRouteActive(location, routes[key].path) ? 'primary' : 'textPrimary',
+            }}
+          />
+        </ListItem>
+      ))}
     </Drawer>
   );
 };
 
-export default MobileSidebar;
+export default withRouter(MobileSidebar);
