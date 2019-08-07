@@ -8,9 +8,11 @@ import FinancialSummaryGraphCard from '../../components/Cards/FinancialSummaryGr
 
 import colors from '../../themes/colors';
 import usePageStyles from './styles';
+import TransactionCreationDialog from '../../components/TransactionCreationDialog';
 
 const BalancePage: React.FC = () => {
   const classNames = usePageStyles({});
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
 
   const transactionsArray = [...Array(5).keys()];
 
@@ -52,7 +54,12 @@ const BalancePage: React.FC = () => {
 
         <Hidden smDown>
           <Grid item xs={12} className={classNames.secondColActionBtnRow}>
-            <Button fullWidth color="primary" variant="contained">
+            <Button
+              fullWidth
+              color="primary"
+              variant="contained"
+              onClick={() => setIsDialogOpen(true)}
+            >
               <AddIcon /> New transaction
             </Button>
           </Grid>
@@ -64,6 +71,7 @@ const BalancePage: React.FC = () => {
             color="primary"
             aria-label="add"
             className={classNames.floatingActionBtn}
+            onClick={() => setIsDialogOpen(true)}
           >
             <AddIcon /> New transaction
           </Fab>
@@ -75,6 +83,8 @@ const BalancePage: React.FC = () => {
           </Grid>
         </Hidden>
       </Grid>
+
+      <TransactionCreationDialog open={isDialogOpen} onClose={() => setIsDialogOpen(false)} />
     </React.Fragment>
   );
 };
