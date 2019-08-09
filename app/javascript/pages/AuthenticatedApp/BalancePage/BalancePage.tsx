@@ -2,13 +2,13 @@ import React from 'react';
 import { Grid, Button, Hidden, Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
-import TransactionListCard from '../../components/Cards/TransactionListCard';
-import FinancialSummaryCard from '../../components/Cards/FinancialSummaryCard';
-import FinancialSummaryGraphCard from '../../components/Cards/FinancialSummaryGraphCard';
+import TransactionListCard from '../../../components/Cards/TransactionListCard';
+import FinancialSummaryCard from '../../../components/Cards/FinancialSummaryCard';
+import FinancialSummaryGraphCard from '../../../components/Cards/FinancialSummaryGraphCard';
+import TransactionCreationDialog from '../../../components/TransactionCreationDialog';
 
-import colors from '../../themes/colors';
+import colors from '../../../themes/colors';
 import usePageStyles from './styles';
-import TransactionCreationDialog from '../../components/TransactionCreationDialog';
 
 const BalancePage: React.FC = () => {
   const classNames = usePageStyles({});

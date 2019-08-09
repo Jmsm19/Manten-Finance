@@ -1,12 +1,12 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Grid, Hidden } from '@material-ui/core';
-import MoneyIcon from '@material-ui/icons/MonetizationOn';
+import { AppBar, Toolbar, Grid, Hidden } from '@material-ui/core';
 
 import MainNavigation from './MainNavigation';
 import MobileTopNavigation from './MobileTopNavigation';
 import UserNavbar from './UserNavbar';
 
 import useTopNavStyles from './styles';
+import AppTitle from '../AppTitle';
 
 const TopNavigation: React.FC = () => {
   const [isAuth] = React.useState(true);
@@ -18,17 +18,7 @@ const TopNavigation: React.FC = () => {
       <Grid item xs>
         <AppBar position="static" color="inherit" className={classNames.topNav}>
           <Toolbar>
-            <span className={classNames.topNavAppTitleSection}>
-              <MoneyIcon color="primary" className={classNames.topNavAppIcon} />
-              <Typography
-                className={classNames.topNavAppTitle}
-                variant="h6"
-                component="h1"
-                color="primary"
-              >
-                Manten Finance
-              </Typography>
-            </span>
+            <AppTitle />
 
             {/* Navigation, Tablet or bigger */}
             <Hidden smDown>

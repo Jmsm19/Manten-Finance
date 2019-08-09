@@ -5,12 +5,15 @@ import useForm from '../../../hooks/useForm';
 import { CreateTransactionFormSetup } from '../../../utils/validation';
 
 import TransactionCreationForm from '../../Forms/TransactionCreationForm';
+import useTransactionCreationDialogStyles from '../styles';
 
 interface Props {
   onClose: () => void;
 }
 
 const TransactionCreationDialogContent: React.FC<Props> = ({ onClose }) => {
+  const classNames = useTransactionCreationDialogStyles({});
+
   const { initialValues, validate } = CreateTransactionFormSetup;
 
   const { isSubmitting, handleChange, handleSubmit, values, errors } = useForm(
@@ -21,13 +24,13 @@ const TransactionCreationDialogContent: React.FC<Props> = ({ onClose }) => {
 
   return (
     <React.Fragment>
-      <DialogTitle id="new-transaction" style={{ paddingBottom: 0 }}>
+      <DialogTitle id="new-transaction" className={classNames.title}>
         New transaction
       </DialogTitle>
-      <DialogContent style={{ paddingTop: 0, paddingBottom: 24 }}>
+      <DialogContent className={classNames.content}>
         <TransactionCreationForm values={values} errors={errors} handleChange={handleChange} />
       </DialogContent>
-      <DialogActions style={{ paddingRight: 24, paddingBottom: 16 }}>
+      <DialogActions className={classNames.actionsSection}>
         <Button onClick={onClose} color="secondary" disabled={isSubmitting}>
           Cancel
         </Button>

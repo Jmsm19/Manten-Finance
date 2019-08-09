@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-import theme from '../../themes/materialTheme';
+import theme from '../../../themes/materialTheme';
 
 const usePageStyles = makeStyles({
   secondColTopRow: {

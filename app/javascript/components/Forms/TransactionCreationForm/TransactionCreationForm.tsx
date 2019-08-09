@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 
 import TransactionAmountInputNumberMask from '../../TransactionAmountInputNumberMask';
+import useTransactionCreationDialogStyles from '../../TransactionCreationDialog/styles';
 
 interface Props {
   values: { [field: string]: any };
@@ -21,12 +22,13 @@ interface Props {
 
 const TransactionCreationForm: React.FC<Props> = ({ values, errors, handleChange }) => {
   const today = new Date();
+  const classNames = useTransactionCreationDialogStyles({});
 
   return (
     <Grid container spacing={1} direction="column">
       {/* Amount input */}
       <Grid item spacing={0} container alignItems="flex-start">
-        <Grid item xs={2} style={{ textAlign: 'center' }}>
+        <Grid item xs={2} className={classNames.formFieldIconContainer}>
           <Icon style={{ marginTop: 36 }}>monetization_on</Icon>
         </Grid>
         <Grid item xs={10}>
@@ -51,8 +53,8 @@ const TransactionCreationForm: React.FC<Props> = ({ values, errors, handleChange
 
       {/* Category select */}
       <Grid item spacing={1} container alignItems="flex-start">
-        <Grid item xs={2} style={{ textAlign: 'center' }}>
-          <Icon style={{ marginTop: 16 }}>archive</Icon>
+        <Grid item xs={2} className={classNames.formFieldIconContainer}>
+          <Icon className={classNames.formFieldIcon}>archive</Icon>
         </Grid>
         <Grid item xs={10}>
           <FormControl fullWidth error={!!errors.category}>
@@ -75,7 +77,7 @@ const TransactionCreationForm: React.FC<Props> = ({ values, errors, handleChange
 
       {/* Description input */}
       <Grid item spacing={1} container alignItems="flex-start">
-        <Grid item xs={2} style={{ textAlign: 'center' }}>
+        <Grid item xs={2} className={classNames.formFieldIconContainer}>
           <Icon style={{ marginTop: 26 }}>subject</Icon>
         </Grid>
         <Grid item xs={10}>
@@ -96,8 +98,8 @@ const TransactionCreationForm: React.FC<Props> = ({ values, errors, handleChange
 
       {/* Date input */}
       <Grid item spacing={1} container alignItems="flex-start">
-        <Grid item xs={2} style={{ textAlign: 'center' }}>
-          <Icon style={{ marginTop: 16 }}>calendar_today</Icon>
+        <Grid item xs={2} className={classNames.formFieldIconContainer}>
+          <Icon className={classNames.formFieldIcon}>calendar_today</Icon>
         </Grid>
         <Grid item xs={10}>
           <TextField
@@ -119,8 +121,8 @@ const TransactionCreationForm: React.FC<Props> = ({ values, errors, handleChange
 
       {/* Account select  */}
       <Grid item spacing={1} container alignItems="flex-start">
-        <Grid item xs={2} style={{ textAlign: 'center' }}>
-          <Icon style={{ marginTop: 16 }}>account_balance_wallet</Icon>
+        <Grid item xs={2} className={classNames.formFieldIconContainer}>
+          <Icon className={classNames.formFieldIcon}>account_balance_wallet</Icon>
         </Grid>
         <Grid item xs={10}>
           <FormControl fullWidth error={!!errors.account}>

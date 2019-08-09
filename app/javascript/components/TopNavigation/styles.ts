@@ -15,17 +15,6 @@ const useTopNavStyles = makeStyles({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  topNavAppTitleSection: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  topNavAppIcon: {
-    marginRight: 10,
-  },
-  topNavAppTitle: {
-    width: 220,
-  },
   mobileTopNav: {
     width: '100%',
     display: 'flex',
