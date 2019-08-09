@@ -4,13 +4,13 @@ import { MuiThemeProvider, Container, Box } from '@material-ui/core';
 
 import { LayoutProvider } from '../../context/layoutContext';
 
-import LoginPage from '../../pages/LoginPage';
-import AuthenticatedApp from '../../pages/AuthenticatedApp';
-
 import { register } from '../../utils/serviceWorker';
 
 import theme from '../../themes/materialTheme';
 import useAppStyles from './styles';
+
+const AuthenticatedApp = React.lazy(() => import('../../pages/AuthenticatedApp'));
+const UnauthenticatedApp = React.lazy(() => import('../../pages/UnauthenticatedApp'));
 
 const App: React.FC = () => {
   const classNames = useAppStyles({});
@@ -22,8 +22,22 @@ const App: React.FC = () => {
           <Box className={classNames.rootContainer}>
             <Container>
               <Switch>
-                <Route path="/dashboard" component={AuthenticatedApp} />
-                <Route path="/" component={LoginPage} />
+                <Route
+                  exact
+                  path="/dashboard"
+                  component={rProps => (
+                    <React.Suspense fallback="Loading Dashboard...">
+                      <AuthenticatedApp {...rProps} />
+                    </React.Suspense>
+                  )}
+                />
+                <Route
+                  component={rProps => (
+                    <React.Suspense fallback="Loading...">
+                      <UnauthenticatedApp {...rProps} />
+                    </React.Suspense>
+                  )}
+                />
               </Switch>
             </Container>
           </Box>

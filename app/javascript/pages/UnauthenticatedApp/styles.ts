@@ -1,8 +1,8 @@
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core';
 
 import colors from '../../themes/colors';
 
-const useLoginPageStyles = makeStyles({
+const useUnauthenticatedAppStyles = makeStyles({
   page: {
     height: 'calc(100vh - 40px - 30px)',
   },
@@ -12,22 +12,6 @@ const useLoginPageStyles = makeStyles({
   appTitleGridSection: {
     paddingLeft: 16,
     paddingBottom: 16,
-  },
-  dividerSection: {
-    marginTop: 16,
-    marginBottom: 8,
-  },
-  inlineDivider: {
-    display: 'inline-block',
-    height: 1,
-    width: 150,
-    marginBottom: 6,
-  },
-  dividerText: {
-    width: 20,
-    padding: 10,
-    color: colors.fadedText,
-    fontStyle: 'italic',
   },
   footer: {
     height: 20,
@@ -41,4 +25,4 @@ const useLoginPageStyles = makeStyles({
   },
 });
 
-export default useLoginPageStyles;
+export default useUnauthenticatedAppStyles;

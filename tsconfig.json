@@ -9,7 +9,7 @@
       "es6",
       "dom"
     ],
-    "module": "es6",
+    "module": "esnext",
     "moduleResolution": "node",
     "sourceMap": true,
     "target": "es5",
