@@ -6,7 +6,7 @@
 
 - Ruby 2.6.3
 - Ruby on Rails (Backend)
-- React 1.6.8+ (with Hooks) via Ruby Webpacker
+- React 16.8+ (with Hooks) via Ruby Webpacker
 - Typescript
 - Responsive design
 
