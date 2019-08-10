@@ -8,10 +8,18 @@ const useUnauthenticatedAppStyles = makeStyles({
   },
   pageGridRow: {
     width: 350,
+    position: 'relative',
+    paddingTop: 65,
   },
   appTitleGridSection: {
-    paddingLeft: 16,
+    paddingLeft: 0,
     paddingBottom: 16,
+    position: 'absolute',
+    top: 0,
+    left: -10,
+  },
+  title: {
+    width: 309,
   },
   footer: {
     height: 20,

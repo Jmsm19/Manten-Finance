@@ -16,6 +16,8 @@ const UnauthenticatedApp: React.FC = () => {
   const classNames = useUnauthenticatedAppStyles({});
   const { isAuth, authUser } = useAuthentication();
 
+  const currentYear = new Date().getFullYear();
+
   React.useEffect(() => {
     if (isAuth && !!authUser) setGoToDashboard(true);
   }, [isAuth, authUser]);
@@ -43,7 +45,7 @@ const UnauthenticatedApp: React.FC = () => {
             alignItems="center"
             className={classNames.appTitleGridSection}
           >
-            <AppTitle />
+            <AppTitle variant="h4" iconSize="large" className={classNames.title} />
           </Grid>
 
           {/* Form */}
@@ -55,7 +57,7 @@ const UnauthenticatedApp: React.FC = () => {
       </Grid>
       <Grid item>
         <footer className={classNames.footer}>
-          &copy; {new Date().getFullYear()} -{' '}
+          &copy; {currentYear} -{' '}
           <a
             target="_blank"
             rel="noopener noreferrer"
