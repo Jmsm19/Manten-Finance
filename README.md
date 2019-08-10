@@ -1,24 +1,15 @@
-# README
+# Manten Finance
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier) [![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.png?v=101)](https://github.com/ellerbrock/typescript-badges/)
 
-Things you may want to cover:
+## Built using
 
-* Ruby version
+- Ruby 2.6.3
+- Ruby on Rails (Backend)
+- React 1.6.8+ (with Hooks) via Ruby Webpacker
+- Typescript
+- Responsive design
 
-* System dependencies
+## API Documentation
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* ### [Postman JSON](https://www.getpostman.com/collections/328e6e548b89c9b47bfd)
