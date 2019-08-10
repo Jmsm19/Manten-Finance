@@ -10,6 +10,7 @@ import { register } from '../../utils/serviceWorker';
 
 import theme from '../../themes/materialTheme';
 import useAppStyles from './styles';
+import LoadingPage from '../../pages/LoadingPage/LoadingPage';
 
 const AuthenticatedApp = React.lazy(() => import('../../pages/AuthenticatedApp'));
 const UnauthenticatedApp = React.lazy(() => import('../../pages/UnauthenticatedApp'));
@@ -30,14 +31,14 @@ const App: React.FC = () => {
                       exact
                       path="/dashboard"
                       component={rProps => (
-                        <React.Suspense fallback="Loading Dashboard...">
+                        <React.Suspense fallback={<LoadingPage text="Loading Dashboard..." />}>
                           <AuthenticatedApp {...rProps} />
                         </React.Suspense>
                       )}
                     />
                     <Route
                       component={rProps => (
-                        <React.Suspense fallback="Loading...">
+                        <React.Suspense fallback={<LoadingPage text="Loading..." />}>
                           <UnauthenticatedApp {...rProps} />
                         </React.Suspense>
                       )}
