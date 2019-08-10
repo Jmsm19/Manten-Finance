@@ -4,10 +4,13 @@ import { useSnackbar } from 'notistack';
 
 import AuthStateReducer from '../store/reducers/authReducer';
 import * as AA from '../store/actions/authActions';
+import LoadingPage from '../pages/LoadingPage';
 
 const AuthenticationContext = React.createContext<undefined | AuthContextValue>(undefined);
 
-export const AuthenticationProvider: React.FC<ProviderProps> = props => {
+export const AuthenticationProvider: React.FC<ProviderProps> = ({ children }) => {
+  const [shouldMountChildren, setShouldMountChildren] = React.useState(false);
+
   const initialState: AuthContextState = {
     isAuth: !!Cookie.get('_authentication'),
     authUser: null,
@@ -19,15 +22,20 @@ export const AuthenticationProvider: React.FC<ProviderProps> = props => {
   const [state, dispatch] = React.useReducer(AuthStateReducer, initialState);
   const value = React.useMemo(() => ({ state, dispatch }), [state]);
 
-  const bootstrapApp = React.useCallback(() => {
-    AA.CheckIfUserIsLoggedIn({ dispatch });
+  const bootstrapApp = React.useCallback(async () => {
+    await Promise.all([AA.CheckIfUserIsLoggedIn({ dispatch })]);
+    setShouldMountChildren(true);
   }, []);
 
   React.useEffect(() => {
     bootstrapApp();
   }, [bootstrapApp]);
 
-  return <AuthenticationContext.Provider value={value} {...props} />;
+  return (
+    <AuthenticationContext.Provider value={value}>
+      {shouldMountChildren ? children : <LoadingPage />}
+    </AuthenticationContext.Provider>
+  );
 };
 
 export const useAuthentication = () => {
