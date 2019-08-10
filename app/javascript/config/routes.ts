@@ -1,6 +1,6 @@
 const routes = {
   root: {
-    path: '/',
+    path: '/dashboard',
     linkText: 'Transactions',
   },
   people: {

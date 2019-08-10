@@ -11,7 +11,7 @@ const setAuthorizationHeader = () => {
 };
 
 const axiosInstance = axios.create({
-  baseURL: '/api',
+  baseURL: '/api/v1',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',

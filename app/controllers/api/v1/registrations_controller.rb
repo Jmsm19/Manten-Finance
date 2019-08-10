@@ -8,10 +8,7 @@ module Api
         user = User.new(user_params)
 
         if user.save
-          reset_session
-          session[:user_id] = user.id
-          render json: UserSerializer.new(user).serialized_json,
-                 status: :created
+          head :created
         else
           render json: { errors: user.errors }, status: :unprocessable_entity
         end

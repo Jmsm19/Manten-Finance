@@ -1,13 +1,16 @@
 import React from 'react';
 import classnames from 'classnames';
 import { withRouter, RouteChildrenProps } from 'react-router';
+import LogoutIcon from '@material-ui/icons/ExitToApp';
 import { Drawer, ListItem, ListItemText } from '@material-ui/core';
 
-import routes from '../../config/routes';
+import { useAuthentication } from '../../context/authenticationContext';
 
+import useTopNavStyles from '../TopNavigation/styles';
+
+import routes from '../../config/routes';
 import { isRouteActive } from '../../utils';
 import useMobileSidebarStyles, { drawerStyles } from './styles';
-import useTopNavStyles from '../TopNavigation/styles';
 
 interface Props extends RouteChildrenProps {
   isOpen: boolean;
@@ -15,6 +18,7 @@ interface Props extends RouteChildrenProps {
 }
 
 const MobileSidebar: React.FC<Props> = ({ location, isOpen, onClose }) => {
+  const { logout } = useAuthentication();
   const classNames = useMobileSidebarStyles({});
   const topNavClassNames = useTopNavStyles({});
   const routesKeys = Object.keys(routes);
@@ -46,6 +50,13 @@ const MobileSidebar: React.FC<Props> = ({ location, isOpen, onClose }) => {
           />
         </ListItem>
       ))}
+      <ListItem button className={classnames([classNames.navLink])} onClick={logout}>
+        <LogoutIcon className={classNames.logoutIcon} />
+        <ListItemText
+          className={classnames([classNames.navLinkText, topNavClassNames.navBtn])}
+          primary="Logout"
+        />
+      </ListItem>
     </Drawer>
   );
 };

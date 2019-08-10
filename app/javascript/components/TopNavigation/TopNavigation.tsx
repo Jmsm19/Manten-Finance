@@ -1,15 +1,17 @@
 import React from 'react';
 import { AppBar, Toolbar, Grid, Hidden } from '@material-ui/core';
 
+import { useAuthentication } from '../../context/authenticationContext';
+
+import AppTitle from '../AppTitle';
 import MainNavigation from './MainNavigation';
 import MobileTopNavigation from './MobileTopNavigation';
 import UserNavbar from './UserNavbar';
 
 import useTopNavStyles from './styles';
-import AppTitle from '../AppTitle';
 
 const TopNavigation: React.FC = () => {
-  const [isAuth] = React.useState(true);
+  const { isAuth, authUser } = useAuthentication();
 
   const classNames = useTopNavStyles({});
 
@@ -33,10 +35,10 @@ const TopNavigation: React.FC = () => {
         </AppBar>
       </Grid>
 
-      {isAuth && (
+      {isAuth && authUser && (
         <Hidden smDown>
           <Grid item md={3}>
-            <UserNavbar user={{ name: 'Manten' }} />
+            <UserNavbar user={authUser} />
           </Grid>
         </Hidden>
       )}

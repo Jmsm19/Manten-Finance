@@ -1,6 +1,8 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import { Switch, Route } from 'react-router';
+import { Switch, Route, Redirect } from 'react-router';
+
+import { useAuthentication } from '../../context/authenticationContext';
 
 import AppTitle from '../../components/AppTitle';
 
@@ -10,7 +12,17 @@ import LoginPage from './LoginPage';
 import useUnauthenticatedAppStyles from './styles';
 
 const UnauthenticatedApp: React.FC = () => {
+  const [goToDashboard, setGoToDashboard] = React.useState(false);
   const classNames = useUnauthenticatedAppStyles({});
+  const { isAuth, authUser } = useAuthentication();
+
+  React.useEffect(() => {
+    if (isAuth && !!authUser) setGoToDashboard(true);
+  }, [isAuth, authUser]);
+
+  if (goToDashboard) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <React.Fragment>

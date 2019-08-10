@@ -8,17 +8,25 @@ import { LoginFormSetup } from '../../../utils/validation';
 import LoginForm from '../../../components/Forms/LoginForm';
 
 import useLoginPageStyles from './styles';
+import { useAuthentication } from '../../../context/authenticationContext';
 
 const LoginPage: React.FC = () => {
   const classNames = useLoginPageStyles({});
+  const { login, isLoggingIn } = useAuthentication();
 
   const { initialValues, validate } = LoginFormSetup;
-  const { values, errors, handleChange } = useForm(undefined, validate, initialValues);
+  const { values, errors, handleChange, handleSubmit } = useForm(login, validate, initialValues);
 
   return (
     <React.Fragment>
       {/* Form */}
-      <LoginForm values={values} errors={errors} handleChange={handleChange} />
+      <LoginForm
+        values={values}
+        errors={errors}
+        isLoggingIn={isLoggingIn}
+        handleChange={handleChange}
+        submit={handleSubmit}
+      />
 
       <Grid item className={classNames.dividerSection}>
         <Divider className={classNames.inlineDivider} />

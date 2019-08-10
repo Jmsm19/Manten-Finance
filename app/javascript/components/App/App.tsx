@@ -1,8 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { MuiThemeProvider, Container, Box } from '@material-ui/core';
+import { SnackbarProvider } from 'notistack';
 
 import { LayoutProvider } from '../../context/layoutContext';
+import { AuthenticationProvider } from '../../context/authenticationContext';
 
 import { register } from '../../utils/serviceWorker';
 
@@ -18,30 +20,34 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
-        <LayoutProvider>
-          <Box className={classNames.rootContainer}>
-            <Container>
-              <Switch>
-                <Route
-                  exact
-                  path="/dashboard"
-                  component={rProps => (
-                    <React.Suspense fallback="Loading Dashboard...">
-                      <AuthenticatedApp {...rProps} />
-                    </React.Suspense>
-                  )}
-                />
-                <Route
-                  component={rProps => (
-                    <React.Suspense fallback="Loading...">
-                      <UnauthenticatedApp {...rProps} />
-                    </React.Suspense>
-                  )}
-                />
-              </Switch>
-            </Container>
-          </Box>
-        </LayoutProvider>
+        <AuthenticationProvider>
+          <SnackbarProvider maxSnack={1}>
+            <LayoutProvider>
+              <Box className={classNames.rootContainer}>
+                <Container>
+                  <Switch>
+                    <Route
+                      exact
+                      path="/dashboard"
+                      component={rProps => (
+                        <React.Suspense fallback="Loading Dashboard...">
+                          <AuthenticatedApp {...rProps} />
+                        </React.Suspense>
+                      )}
+                    />
+                    <Route
+                      component={rProps => (
+                        <React.Suspense fallback="Loading...">
+                          <UnauthenticatedApp {...rProps} />
+                        </React.Suspense>
+                      )}
+                    />
+                  </Switch>
+                </Container>
+              </Box>
+            </LayoutProvider>
+          </SnackbarProvider>
+        </AuthenticationProvider>
       </MuiThemeProvider>
     </BrowserRouter>
   );

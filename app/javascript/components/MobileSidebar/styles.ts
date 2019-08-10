@@ -1,9 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core';
 
 import colors from '../../themes/colors';
 
-const useMobileSidebarStyles = makeStyles({
+const useMobileSidebarStyles = makeStyles((theme: Theme) => ({
   navLink: {
     padding: 16,
     '&.active': {
@@ -13,7 +14,11 @@ const useMobileSidebarStyles = makeStyles({
   navLinkText: {
     width: '100%',
   },
-});
+  logoutIcon: {
+    color: colors.fadedText,
+    marginRight: theme.spacing(1),
+  },
+}));
 
 export const drawerStyles: React.CSSProperties = {
   height: 'max-content',
