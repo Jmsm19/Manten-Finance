@@ -9,6 +9,7 @@ const useAppStyles = makeStyles({
     paddingTop: styleConstants.doubleMargin,
     paddingBottom: styleConstants.doubleMargin,
     backgroundColor: colors.fadedWhite,
+    minHeight: '100vh',
   },
   mainGrid: {
     height: '100%',
