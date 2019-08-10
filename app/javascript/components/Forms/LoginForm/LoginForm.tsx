@@ -17,7 +17,7 @@ const LoginForm: React.FC<Props> = ({ isLoggingIn, values, handleChange, submit 
   const classNames = useLoginFormStyles({});
 
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={submit} className={classNames.fromGridContainer}>
       <Grid container spacing={1} direction="column" className={classNames.fromGridContainer}>
         <Grid item>
           <TextField

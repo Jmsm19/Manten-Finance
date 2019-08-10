@@ -18,7 +18,7 @@ const RegisterForm: React.FC<Props> = ({ values, isRegistering, errors, handleCh
   const classNames = useRegisterFormStyles({});
 
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={submit} className={classNames.fromGridContainer}>
       <Grid container spacing={1} direction="column" className={classNames.fromGridContainer}>
         <Grid item>
           <TextField
