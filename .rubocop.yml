@@ -10,3 +10,9 @@ Style/Documentation:
   Include:
     - app/models/**/*
     - lib/**/*
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - '**/*_spec.rb'

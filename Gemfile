@@ -49,6 +49,7 @@ group :development, :test do
 
   # Testing
   gem 'rspec-rails', '~> 3.8'
+  gem 'faker'
 end
 
 group :development do
@@ -69,6 +70,9 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+
+  # Coverage
+  gem 'simplecov', require: false
 end
 
 group :production do

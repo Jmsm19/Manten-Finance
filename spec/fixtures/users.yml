@@ -1,0 +1,4 @@
+Manten:
+  name: Jorge
+  email: jorge@gmail.com
+  password_digest: <%= BCrypt::Password.create('password') %>

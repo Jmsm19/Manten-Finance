@@ -28,8 +28,12 @@ module Api
       end
 
       def logout
-        reset_session
-        head :ok
+        if @current_user
+          reset_session
+          head :ok
+        else
+          head :unauthorized
+        end
       end
     end
   end

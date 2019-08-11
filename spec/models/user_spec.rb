@@ -3,5 +3,17 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  def create_valid_user
+    User.create!(
+      name: Faker::Name.name, email: Faker::Internet.email, password: 'password'
+    )
+  end
+
+  it 'creation throws error when missing parameters' do
+    expect { User.create! }.to raise_error(ActiveRecord::RecordInvalid)
+  end
+
+  it 'creates user with correct parameters' do
+    expect { create_valid_user }.to change(User, :count)
+  end
 end
