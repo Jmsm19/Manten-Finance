@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      root 'example#index'
-
       post 'auth/register', to: 'registrations#create'
       post 'auth/login', to: 'sessions#create'
       delete 'auth/logout', to: 'sessions#logout'
       get 'auth/logged_in', to: 'sessions#logged_in'
+
+      resources :accounts, except: %i[new edit]
     end
   end
 

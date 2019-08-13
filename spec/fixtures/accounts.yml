@@ -1,0 +1,6 @@
+MantenBOD:
+  name: 'BOD'
+  currency: 'bolivars'
+  account_type: 'bank'
+  initial_amount: '0.0'
+  user_id: <%= User.find(ActiveRecord::FixtureSet.identify('Manten')).id %>
