@@ -6,8 +6,8 @@
   "scripts": {
     "dev:client": "./bin/webpack-dev-server",
     "lint:app": "yarn lint:ruby && yarn lint:ts",
-    "lint:ts": "eslint ./app/javascript/**/*.{ts,tsx}",
-    "lint:ruby": "bundle exec rubocop -a 'app/**/*.rb'",
+    "lint:ts": "eslint app/javascript/**/*.{ts,tsx}",
+    "lint:ruby": "bundle exec rubocop -a app/**/*.rb",
     "prettier:ruby": "./node_modules/.bin/prettier --write '*/**/*.rb'",
     "rails:test": "bundle exec rspec"
   },
@@ -61,13 +61,28 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.6.1",
     "husky": "^3.0.2",
+    "lint-staged": "^9.2.1",
     "prettier": "^1.18.2",
     "prettier-eslint": "^9.0.0",
     "webpack-dev-server": "^3.7.2"
   },
+  "lint-staged": {
+    "*/**/*.rb": [
+      "yarn prettier:ruby",
+      "git add"
+    ],
+    "app/**/*.rb": [
+      "bundle exec rubocop -a app/**/*.rb",
+      "git add"
+    ],
+    "app/javascript/**/*.{ts,tsx}": [
+      "yarn eslint ./app/javascript/**/*.{ts,tsx}",
+      "git add"
+    ]
+  },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn prettier:ruby && yarn lint:app"
+      "pre-commit": "yarn lint-staged && yarn rails:test"
     }
   }
 }
