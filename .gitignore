@@ -39,3 +39,4 @@ yarn-debug.log*
 
 # Coverage reports
 coverage
+examples.txt

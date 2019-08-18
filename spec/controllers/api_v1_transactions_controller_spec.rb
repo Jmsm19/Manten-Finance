@@ -2,33 +2,36 @@
 
 require 'rails_helper'
 
-RSpec.describe Api::V1::AccountsController, type: :controller do
+RSpec.describe Api::V1::TransactionsController, type: :controller do
   let(:account) { create :account }
 
-  before(:each) { @user = account.user }
+  before(:each) do
+    @user = account.user
+    @transaction = account.transactions.first
+  end
 
   describe 'GET #index' do
     it 'returns Unauthorized when not logged in' do
-      get :index
+      get :index, params: { account_id: account.id }
       expect(response).to have_http_status(:unauthorized)
     end
 
-    it 'returns http success' do
+    it 'returns http OK' do
       login_user @user
-      get :index
+      get :index, params: { account_id: account.id }
       expect(response).to have_http_status(:ok)
     end
   end
 
   describe 'POST #create' do
     it 'returns Unauthorized when not logged in' do
-      post :create
+      post :create, params: { account_id: account.id }
       expect(response).to have_http_status(:unauthorized)
     end
 
     it 'returns Unprocessable Entity on missing or wrong parameters' do
       login_user @user
-      post :create
+      post :create, params: { account_id: account.id }
       expect(response).to have_http_status(:unprocessable_entity)
     end
 
@@ -36,10 +39,11 @@ RSpec.describe Api::V1::AccountsController, type: :controller do
       login_user @user
       post :create,
            params: {
-             name: Faker::Name.name,
-             account_type: 'bank',
-             currency: 'bolivars',
-             initial_amount: '0.0'
+             account_id: account.id,
+             amount: Faker::Number.decimal(l_digits: 2),
+             description: Faker::Lorem.sentence,
+             transaction_category_id: create(:income_transaction_category).id,
+             date: Faker::Date.backward(days: 14)
            }
       expect(response).to have_http_status(:created)
     end
@@ -47,65 +51,71 @@ RSpec.describe Api::V1::AccountsController, type: :controller do
 
   describe 'GET #show' do
     it 'returns Unauthorized when not logged in' do
-      get :show, params: { id: 9_999 }
+      get :show, params: { account_id: account.id, id: @transaction.id }
       expect(response).to have_http_status(:unauthorized)
     end
 
     it 'returns Not Found on missing resource' do
       login_user @user
-      get :show, params: { id: 9_999 }
+      get :show, params: { account_id: account.id, id: 9_999 }
       expect(response).to have_http_status(:not_found)
     end
 
-    it 'returns http success' do
+    it 'returns http OK' do
       login_user @user
-      get :show, params: { id: account.id }
+      get :show, params: { account_id: account.id, id: @transaction.id }
       expect(response).to have_http_status(:ok)
     end
   end
 
   describe 'PUT #update' do
     it 'returns Unauthorized when not logged in' do
-      put :update, params: { id: 1 }
+      put :update, params: { account_id: account.id, id: @transaction.id }
       expect(response).to have_http_status(:unauthorized)
     end
 
     it 'returns Not Found on missing resource' do
       login_user @user
-      put :update, params: { id: 9_999 }
+      put :update, params: { account_id: account.id, id: 9_999 }
       expect(response).to have_http_status(:not_found)
     end
 
     it 'returns Unprocessable Entity on missing or wrong parameters' do
       login_user @user
-      put :update, params: { id: account.id }
+      put :update,
+          params: { account_id: account.id, id: @transaction.id, date: 1_234 }
       expect(response).to have_http_status(:unprocessable_entity)
     end
 
-    it 'returns http success' do
+    it 'returns http OK' do
       login_user @user
-      new_account_name = Faker::Name.name
-      put :update, params: { id: account.id, name: new_account_name }
+      new_date = 1.year.from_now.strftime('%Y-%m-%d')
+      put :update,
+          params: {
+            account_id: account.id, id: @transaction.id, date: new_date
+          }
       expect(response).to have_http_status(:ok)
-      expect(Account.find(account.id).name).to eq(new_account_name)
+
+      updated_date = body_as_json['data']['attributes']['date']
+      expect(updated_date).to eq(new_date)
     end
   end
 
   describe 'DELETE #destroy' do
     it 'returns Unauthorized when not logged in' do
-      delete :destroy, params: { id: 1 }
+      delete :destroy, params: { account_id: account.id, id: @transaction.id }
       expect(response).to have_http_status(:unauthorized)
     end
 
     it 'returns Not Found on missing resource' do
       login_user @user
-      delete :destroy, params: { id: 9_999 }
+      delete :destroy, params: { account_id: account.id, id: 9_999 }
       expect(response).to have_http_status(:not_found)
     end
 
-    it 'returns OK on successful delete of resource' do
+    it 'returns http OK' do
       login_user @user
-      delete :destroy, params: { id: account.id }
+      delete :destroy, params: { account_id: account.id, id: @transaction.id }
       expect(response).to have_http_status(:ok)
     end
   end

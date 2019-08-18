@@ -3,6 +3,7 @@
 # Account model
 class Account < ApplicationRecord
   belongs_to :user
+  has_many :transactions
 
   enum account_type: { bank: 0, credit_card: 1 }
   enum currency: { bolivars: 0, dollars: 1 }
