@@ -5,9 +5,6 @@
   "homepage": "https://manten-rails-finance.herokuapp.com/",
   "scripts": {
     "dev:client": "./bin/webpack-dev-server",
-    "lint:app": "yarn lint:ruby && yarn lint:ts",
-    "lint:ts": "eslint app/javascript/**/*.{ts,tsx}",
-    "lint:ruby": "bundle exec rubocop -a app/**/*.rb",
     "prettier:ruby": "./node_modules/.bin/prettier --write '*/**/*.rb'",
     "rails:test": "bundle exec rspec"
   },
@@ -73,6 +70,10 @@
     ],
     "app/**/*.rb": [
       "bundle exec rubocop -a app/**/*.rb",
+      "git add"
+    ],
+    "spec/**/*.rb": [
+      "bundle exec rubocop -a spec/**/*.rb",
       "git add"
     ],
     "app/javascript/**/*.{ts,tsx}": [

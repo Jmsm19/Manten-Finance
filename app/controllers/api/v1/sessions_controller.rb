@@ -6,6 +6,7 @@ module Api
     class SessionsController < Api::V1::BaseController
       include CurrentUserConcern
 
+      # TODO: Show appropriate 404 message
       def create
         user = User.find_by(email: params[:email].downcase)
 
