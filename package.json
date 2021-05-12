@@ -27,7 +27,7 @@
     "@types/webpack-env": "^1.14.0",
     "axios": "^0.19.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "classnames": "^2.2.6",
     "color": "^3.1.2",
     "date-fns": "^1.30.1",
